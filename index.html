@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CLT Explorer — See how the Central Limit Theorem works</title>
+<meta name="description" content="An interactive visual explanation of the Central Limit Theorem. Take samples, watch the sampling distribution form, and reveal hidden population means.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="app">
+
+  <!-- ===================== HEADER ===================== -->
+  <header class="header">
+    <div class="header-left">
+      <svg class="logo-mark" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <path d="M2 30C8 30 8 8 14 8C20 8 20 30 26 30C29 30 29 20 38 20" stroke="#1f7a3f" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      <div class="header-titles">
+        <h1>CLT Explorer</h1>
+        <p>See how the Central Limit Theorem works</p>
+      </div>
+    </div>
+    <button class="about-btn" id="aboutBtn" type="button" aria-haspopup="dialog" aria-controls="aboutModal">
+      <svg viewBox="0 0 20 20" width="16" height="16" fill="none" aria-hidden="true"><circle cx="10" cy="10" r="8.5" stroke="currentColor" stroke-width="1.4"/><path d="M10 9v5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/><circle cx="10" cy="6.3" r="1" fill="currentColor"/></svg>
+      About CLT
+    </button>
+  </header>
+
+  <!-- ===================== LAYOUT ===================== -->
+  <div class="layout">
+
+    <!-- LEFT SIDEBAR -->
+    <aside class="sidebar sidebar-left" aria-label="Choose an example">
+      <h2 class="sidebar-heading">1. Choose an example</h2>
+      <div class="example-list" id="exampleList" role="listbox" aria-label="Examples"></div>
+    </aside>
+
+    <!-- CENTER -->
+    <main class="main">
+
+      <section class="experiment-card" aria-label="Sampling experiment">
+        <div class="experiment-top">
+          <div class="experiment-title" id="experimentTitle"></div>
+          <div class="experiment-stats" id="experimentStats"></div>
+        </div>
+
+        <div class="chart-wrap">
+          <svg id="mainChart" viewBox="0 0 900 340" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Sampling distribution of sample means"></svg>
+        </div>
+        <div class="chart-legend" id="chartLegend"></div>
+
+        <div class="controls-row">
+          <div class="controls-label">Add more samples</div>
+          <div class="controls-buttons">
+            <button class="btn btn-outline" id="btnAdd1" type="button">+1 Sample</button>
+            <button class="btn btn-solid" id="btnAdd5" type="button">+5 Samples</button>
+            <button class="btn btn-outline" id="btnAdd10" type="button">+10 Samples</button>
+            <button class="btn btn-ghost" id="btnReset" type="button">
+              <svg viewBox="0 0 16 16" width="13" height="13" fill="none" aria-hidden="true"><path d="M13.5 8A5.5 5.5 0 1 1 11.9 4.1" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/><path d="M13.7 2.5V5.5H10.7" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              Reset
+            </button>
+          </div>
+          <div class="limit-note" id="limitNote" aria-live="polite"></div>
+        </div>
+      </section>
+
+      <section class="samples-section" aria-label="Individual samples">
+        <div class="samples-header">
+          <h3>Individual samples</h3>
+          <span class="samples-count" id="samplesCount"></span>
+        </div>
+        <div class="samples-empty" id="samplesEmpty">Add a sample to see it appear here.</div>
+        <div class="sample-rows" id="sampleRows"></div>
+      </section>
+
+      <section class="estimate-section" aria-label="Estimate summary" id="estimateSection"></section>
+
+    </main>
+
+    <!-- RIGHT SIDEBAR -->
+    <aside class="sidebar sidebar-right" aria-label="About this example and progress">
+      <div class="card about-card">
+        <h2 class="sidebar-heading">About this example</h2>
+        <div class="about-icon" id="aboutIcon"></div>
+        <div class="about-text" id="aboutText"></div>
+      </div>
+
+      <div class="card progress-card">
+        <h2 class="sidebar-heading">Your progress</h2>
+        <ol class="progress-list" id="progressList"></ol>
+      </div>
+
+      <div class="card reveal-card" id="revealCard"></div>
+    </aside>
+
+  </div>
+</div>
+
+<!-- ===================== ABOUT CLT MODAL ===================== -->
+<div class="modal-backdrop hidden" id="aboutModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+  <div class="modal">
+    <button class="modal-close" id="modalClose" aria-label="Close">
+      <svg viewBox="0 0 16 16" width="14" height="14" fill="none"><path d="M2 2L14 14M14 2L2 14" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+    </button>
+    <h2 id="modalTitle">The Central Limit Theorem</h2>
+    <p>When we repeatedly take sufficiently large random samples from a population, the distribution of their sample means tends to become approximately normal — even when the original population is not normally distributed.</p>
+    <p>The sampling distribution is centered around the population mean. Taking more repeated samples doesn't create this effect by itself — it lets us observe a sampling distribution that already exists, made visible one sample mean at a time.</p>
+    <p class="modal-caveat">This assumes the usual CLT conditions: independent, identically distributed observations and a reasonably large sample size relative to the population's own variability.</p>
+    <p class="modal-copyright">&copy; 2026 Project_Ashton</p>
+  </div>
+</div>
+
+<footer class="site-footer">
+  <p>&copy; 2026 Project_Ashton</p>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
