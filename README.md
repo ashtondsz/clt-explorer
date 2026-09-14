@@ -28,7 +28,7 @@ The goal is to make these ideas something you can **see and interact with**, rat
 
 Open the interactive explorer:
 
-**[CLT Explorer](https://<your-username>.github.io/<your-repo>/)**
+**[CLT Explorer](https://ashtondsz.github.io/clt-explorer/)**
 
 No installation is required.
 
