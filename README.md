@@ -2,6 +2,8 @@
 
 An interactive way to understand the **Central Limit Theorem** — without getting buried in formulas.
 
+<img width="1452" height="827" alt="Screenshot 2026-09-14 at 2 01 02 PM" src="https://github.com/user-attachments/assets/79cd0ad9-c035-4829-9f42-9d57a87ccc8b" />
+
 Take samples from different populations, watch their sample means build a distribution, and see how the results connect to the population you're studying.
 
 ## 🔎 What can you explore?
